@@ -1,0 +1,30 @@
+{{ $namespace := .Release.Name }}
+{{ $image := .Values.WEB.IMAGE.repository }}
+{{ $tag := .Values.WEB.IMAGE.tag }}
+{{ $name := .Values.WEB.IMAGE.name }}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ print $namespace "-web" }}
+  name: {{ print $namespace "-web" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ print $namespace "-web" }}
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ print $namespace "-web" }}
+    
+    spec:
+      containers:
+      - image: {{ $image }}:{{ $tag }}
+        name: {{ $name }}
+        resources: {}
+status: {}

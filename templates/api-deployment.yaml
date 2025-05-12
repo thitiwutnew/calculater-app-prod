@@ -1,0 +1,36 @@
+{{ $namespace := .Release.Name }}
+{{ $image := .Values.API.IMAGE.repository }}
+{{ $tag := .Values.API.IMAGE.tag }}
+{{ $name := .Values.API.IMAGE.name }}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ print $namespace "-api" }}
+  name: {{ print $namespace "-api" }}
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ print $namespace "-api" }}
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ print $namespace "-api" }}
+    
+    spec:
+      containers:
+      - image: {{ $image }}:{{ $tag }}
+        name: {{ $name }}
+        resources: {}
+        envFrom:
+        - configMapRef:
+            name: api-env
+        
+status: {}

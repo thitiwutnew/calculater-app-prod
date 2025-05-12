@@ -1,0 +1,13 @@
+API:
+  IMAGE:
+    name: api
+    repository: habor.analytichpxv3.online/kubernetes-workshop/new-api
+    tag: dev-e240a62
+  API_KEY: aaaaaaaaaaaa
+WEB:
+  IMAGE:
+    name: web
+    repository: habor.analytichpxv3.online/kubernetes-workshop/new-ui
+    tag: dev-f6aa929
+  API_KEY: aaaaaaaaaaaa
+ENV: prd
